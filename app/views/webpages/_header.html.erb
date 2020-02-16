@@ -1,0 +1,70 @@
+<!-- ***** Header Area Start ***** -->
+<header class="header-area">
+  <div class="header-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-1 header-top-left no-padding">
+        </div>
+        <div class="col-11 header-top-right no-padding">
+          <% if signed_in? %>
+            <a class="top-contact" href=<%= signout_path%>><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logut</a>
+            <% if current_user.admin? %>
+              <a class="top-contact" href=<%=users_path%>><i class="fa fa-user"></i>&nbsp;&nbsp;Admin</a>
+            <%end%>
+          <%else%>
+            <a class="top-contact" href=<%= new_user_session_path%>> <i class="fa fa-user"></i>&nbsp;&nbsp;Login&nbsp;&nbsp;</a>
+            <a class="top-contact" href=<%= new_user_registration_path %>><i class="fa fa-user"></i>&nbsp;&nbsp;Signup&nbsp;&nbsp;</a>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg">
+          <!-- Logo -->
+          <a class="navbar-brand" href="<%= root_path %>"><img src="/img/core-img/logo.png" alt="Logo"></a>
+          <!-- Navbar Toggler -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#worldNav" aria-controls="worldNav" aria-expanded="false" aria-label="Toggle navigation" style="outline: none"><span class="navbar-toggler-icon"></span></button>
+          <!-- Navbar -->
+          <div class="collapse navbar-collapse" id="worldNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <% unless signed_in?%>
+                  <a class="nav-link " href=<%=new_user_session_path  %>>Ask A Question ?</a>
+                <%else%>
+                  <a class="nav-link " href=<%=new_question_path%>>Ask A Question ?</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <% if current_user%>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= current_user.first_name%></a><%end%>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href=<%= profile_path %>>Profile</a>
+                    <a class="dropdown-item" href=<%=edit_user_registration_path%>> Account Setting</a>
+                  </div>
+                </li>
+              <%end%>
+            </ul>
+            <!-- Search Form  -->
+            <div id="search-wrapper">
+              <!--<form action="#">-->
+              <%= form_tag search_path, :method => 'get' do %>
+                <!--<input type="text" id="search" placeholder="Search something...">-->
+                <%= text_field_tag :search, params[:search] %>
+                <div id="close-icon"></div>
+                <!--<input class="d-none" type="submit" value="">-->
+                <!--</form>-->
+              <%end%>
+            </div>
+          </div>
+          <!-- navbar close -->
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- ***** Header Area End ***** -->

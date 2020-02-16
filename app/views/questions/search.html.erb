@@ -1,0 +1,136 @@
+<%= render "webpages/header" %>
+<!-- ***** Header Area Start ***** -->
+<!-- ***** Header Area End ***** -->
+<!-- ********** Hero Area Start ********** -->
+<div class="hero-area height-600 bg-img background-overlay" style="background-image: url(../img/blog-img/bg2.jpg);">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="single-blog-title text-center">
+          <h3></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ********** Hero Area End ********** -->
+<div class="main-content-wrapper section-padding-100">
+  <div class="container">
+    <div class="row justify-content-center">
+      <!-- ============= Post Content Area ============= -->
+      <div class="col-12 col-lg-8">
+        <div class="single-blog-content ">
+          <div class="world-latest-articles">
+            <div class="row">
+              <div class="col-12 col-lg-12">
+                <div style="margin-bottom: 30px">
+                  <h5>Search Results</h5>
+                </div>
+                <!-- Single Blog Post -->
+                <% if @questions.length > 0 %>
+                <% @questions.each do |question| %>
+                  <div class="single-blog-post post-style-4 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                    <!-- Post Content -->
+                    <div class="post-content" style="box-shadow:none">
+                      <a href=<%= question_path(:id => question.id) %> class="headline">
+                        <h5><%= question.title%></h5>
+                      </a>
+                      <p><%= sanitize question.body%></p>
+                      <!-- Post Meta -->
+                      <div class="post-meta">
+                        <p><a href="#" class="post-author"><%= User.find(question.user_id).first_name %></a> on <a href="#" class="post-date"><%= question.updated_at %></a></p>
+                      </div>
+                    </div>
+                  </div>
+                <%end%>
+                <%else%>
+                <h5>Results Not Found</h5>
+                <%end%>
+                 <%= will_paginate @questions %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ========== Sidebar Area ========== -->
+      <div class="col-12 col-md-8 col-lg-4">
+        <div class="post-sidebar-area mb-100">
+          <!-- Widget Area -->
+          <div class="sidebar-widget-area">
+            <h5 class="title">About QARail</h5>
+            <div class="widget-content">
+              <p>QARail's mission is to share and grow the world’s knowledge. A vast amount of the knowledge that would be valuable to many people is currently only available to a few — either locked in people’s heads, or only accessible to select groups. We want to connect the people who have knowledge to the people who need it, to bring together people with different perspectives so they can understand each other better, and to empower everyone to share their knowledge for the benefit of the rest of the world.</p>
+            </div>
+          </div>
+          <!-- Widget Area -->
+           <!-- category Area -->
+                           <div class="sidebar-widget-area">
+                                <h5 class="title">Categories</h5>
+                                <div class="widget-content">
+                                    <!-- Single Blog Post -->
+                                    <% Category.all.each do |category| %>
+                                    <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                                      
+                                        <!-- Post Content -->
+                                        <div class="post-content" >
+                                            <a href="<%= category_path(:category => category.id) %>" class="headline" >
+                                                <h5 class="mb-0" ><%= category.name%></h5>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <%end%>
+                                </div>
+                            </div>
+                            <!-- category Area -->
+          
+          <!-- Widget Area -->
+          <div class="sidebar-widget-area">
+            <h5 class="title">Stay Connected</h5>
+            <div class="widget-content">
+              <div class="social-area d-flex justify-content-between">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-pinterest"></i></a>
+                <a href="#"><i class="fa fa-vimeo"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-google"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ============== Related Post ============== -->
+  </div>
+</div>
+<!-- ***** Footer Area Start ***** -->
+<%= render "webpages/footer" %>
+<!-- ***** Footer Area End ***** -->
+<!--<h1>All Questions</h1>
+<table>
+<tr>
+<th>Title</th>
+<th>Body</th>
+<th>Edit</th>
+<tr>
+<tbody>
+<% @questions.each do |question| %>
+<tr>
+<td><%=question.title%></td>
+<td><%= sanitize question.body%></td>
+<td><%= link_to "Edit", edit_question_path(question)%></td>
+<td><%= link_to "Delete", question_path(question), method: :delete, data: { Confirm: 'Are YOu Sure?' } %><td>
+<td><%= link_to "Show", question_path(question)%></td>
+
+</tr>
+<%end%>
+</tbody>
+</table>
+<br>
+<br>
+<%= link_to "Ask Question", new_question_path %>
+<%= link_to "Facebook Login", user_facebook_omniauth_authorize_path %>
+<%= link_to "Google Login", user_google_oauth2_omniauth_authorize_path %>
+<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+-->

@@ -1,0 +1,150 @@
+<%= render "webpages/header" %>
+
+    <!-- ********** Hero Area Start ********** -->
+    <div class="hero-area height-600 bg-img background-overlay" style="background-image: url(../img/blog-img/bg2.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="single-blog-title text-center">
+                        <h3></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ********** Hero Area End ********** -->
+
+    <div class="main-content-wrapper section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area ============= -->
+                <div class="col-12 col-lg-8 mt-30">
+                    <div class="single-blog-content ">
+                        <!-- Post Meta -->
+                        
+                        <!-- Post Content -->
+                        
+                    </div>
+                    <br>
+                    
+
+                    <div class="single-blog-content ">
+                        
+                        <!-- Post Content -->
+                        <div class="post-content">
+                           <!-- form open -->
+                       <div id="login-form">
+                            <!-- <h1 class="login-tag">Ask A Question</h1> -->
+                          <%= bootstrap_form_for  @question do |f| %>
+                             <h5 style="text-align:center; text-transform:uppercase">Ask Your Question Here</h5><br>
+                            
+                            <p style= "padding: 0 2px;color: #0C0D0E;font-family: inherit;font-size: 16px;font-weight: 500;cursor: pointer;">Title</p>
+                              <%= f.text_field :title, hide_label: true, placeholder: "What's your programming question? Be specific.", required: :true %>
+                             
+                              
+                              <p style= "padding: 0 2px;color: #0C0D0E;font-family: inherit;font-size: 16px;font-weight: 500;cursor: pointer;" >Body</p>
+                              <%= f.hidden_field :body, id: :question_body %>
+                                <trix-editor style="min-height:12em" input="question_body" ></trix-editor>
+                            <br>
+                     
+                             <!-- <%= f.select :tag_ids, Tag.all.collect{ |tag| [tag.name, tag.name] }, {}, include_hidden: false,  class: "select-tokenizer", multiple: true %>-->
+                           <!--<%= f.label :Tags %>-->
+                           <p style= "padding: 0 2px;color: #0C0D0E;font-family: inherit;font-size: 16px;font-weight: 500;cursor: pointer;" >Tags</p>
+                            <%= f.text_field :tag_list, hide_label: :true, placeholder: "Add tags seperated with comma." %>
+                        
+                             <br>
+                             <!--<%= collection_select(:question, :category_ids, Category.all, :id, :name, {}, { :multiple => true }) %>-->
+                             <!--<%= f.label :Category %>-->
+                             <p style= "padding: 0 2px;color: #0C0D0E;font-family: inherit;font-size: 16px;font-weight: 500;cursor: pointer;" >Category</p>
+                             <%= f.text_field :category_list, hide_label: :true, placeholder: "Add categories seperated with comma." %>
+                              <br>
+
+                             <div style="text-align: left;margin: auto">  
+                             <%= f.submit "Post your question" %><br><br>
+                             </div>
+                            <%end%>
+                            
+                        </div>
+                          <!-- form Close -->
+                          </div>
+                          </div>
+                </div>
+                
+
+                <!-- ========== Sidebar Area ========== -->
+                <div class="col-12 col-md-8 col-lg-4"><br><br>
+                    <div class="post-sidebar-area mb-100">
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">About QARail</h5>
+                            <div class="widget-content">
+                                <p>QARail's mission is to share and grow the world’s knowledge. A vast amount of the knowledge that would be valuable to many people is currently only available to a few — either locked in people’s heads, or only accessible to select groups. We want to connect the people who have knowledge to the people who need it, to bring together people with different perspectives so they can understand each other better, and to empower everyone to share their knowledge for the benefit of the rest of the world.</p>
+                            </div>
+                        </div>
+                        <!-- Widget Area -->
+                        
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Stay Connected</h5>
+                            <div class="widget-content">
+                                <div class="social-area d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-vimeo"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-google"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                      
+                     
+                    </div>
+                </div>
+            </div>
+     
+
+        </div>
+    </div>
+
+    <!-- ***** Footer Area Start ***** -->
+ <%= render "webpages/footer" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

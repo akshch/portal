@@ -1,0 +1,90 @@
+<%= render "webpages/header" %>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ********** Hero Area Start ********** -->
+    <div class="hero-area height-400 bg-img background-overlay" style="background-image: url(../img/blog-img/bg4.jpg);"></div>
+    <!-- ********** Hero Area End ********** -->
+
+    <div class="regular-page-wrap section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div class="page-content">
+                       <!-- form open -->
+                        <div id="login-form">
+                            <h1 class="login-tag">Signup Page</h1>
+                            <!--<form method="POST">-->
+                              <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                            <p class="blabla">Sign in to start your session</p><br>
+                             <%= f.text_field :first_name, label: "First Name" , autofocus: true %>
+                             <%= f.text_field :last_name, label: "Last Name" , autofocus: true %>
+                              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                              <%= f.password_field :password, autocomplete: "new-password" %>
+                              <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                             <br><br>
+                             <div style="text-align: center;margin: auto">
+                                 <%= f.submit "Sign up" %><br><br>
+                             <button type="button" class="btn" style="background: #D84B37"> <a style="color:#fff" href=<%= user_google_oauth2_omniauth_authorize_path %>> <i class="fa fa-google fa-lg" aria-hidden="true"></i> Sign in with google</button><br><br>
+                             <button type="button" class="btn" style="background: #3c5a99"> <a style="color:#fff" href=<%= user_facebook_omniauth_authorize_path %>> <i class="fa fa-facebook fa-lg" aria-hidden="true" ></i> Sign in with facebook</button><br><br>
+                              <!-- <a href="ForgotPass.html">I forgot my password</a><br>
+                              <a href="ResetPass.html">Reset my password</a><br>
+                              <a href="Register.html">Register a new membership</a><br><br> -->
+                           
+                                                           
+                             </div>
+                             <% end %>
+                            <!--</form>-->
+                        </div>
+                          <!-- form Close -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ***** Footer Area Start ***** -->
+    <%= render 'webpages/footer' %>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>-->

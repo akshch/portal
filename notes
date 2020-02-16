@@ -1,0 +1,60 @@
+rails g model Question title:string
+rails db:migrate
+rails g controller question
+
+rails g model Answer description:text
+rails db:migrate
+rails g controller answer
+
+gem devise
+
+
+
+rails db:migrate
+
+rails g migration add_column_to_question body:string
+rails db:migrate
+
+gem trix
+
+rails g controller webpages
+
+rails g model Tag name:string 
+rails db:migrate
+
+rails g model Tagging question:references tag:references
+rails db:migrate
+
+rails g model Category name:string question:references
+rails db:migrate
+
+rails g migration AddRoleToUsers role:integer
+rails db:migrate
+
+rails g migration AddStatusToAnswers status:string
+rails db:migrate
+
+rails g migration AddUserToQuestions user:references
+rails db:migrate
+
+rails g migration AddUserToAnswers user:references
+rails db:migrate
+
+rails g model Category name:string 
+rails db:migrate
+
+rails g model Categorization question:references category:references
+rails db:migrate
+  Give relation  in category and question model
+
+rails g migration AddStatusToQuestions status:string
+ rails db:migrate
+
+ rails g migration AddQuestionCountToQuestions question_count:integer
+ rails db:migrate
+
+ rails g model TodayQuestion question_id:integer
+  rails db:migrate
+
+rails active_storage:install
+rails db:migrate

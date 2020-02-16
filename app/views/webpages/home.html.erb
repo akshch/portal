@@ -1,0 +1,217 @@
+
+    <!-- Preloader Start -->
+    <!-- <div id="preloader">
+        <div class="preload-content">
+            <div id="world-load"></div>
+        </div>
+    </div> -->
+    <!-- Preloader End -->
+
+    <%= render "header" %>
+
+    <!-- ********** Hero Area Start ********** -->
+    <div class="hero-area">
+
+        <!-- Hero Slides Area -->
+        <div class="hero-slides owl-carousel">
+            <!-- Single Slide -->
+            <div class="single-hero-slide bg-img background-overlay" style="background-image: url(img/blog-img/bg2.jpg);"></div>
+            <!-- Single Slide -->
+            <div class="single-hero-slide bg-img background-overlay" style="background-image: url(img/blog-img/bg1.jpg);"></div>
+        </div>
+
+        <!-- Hero Post Slide -->
+        <div class="hero-post-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="hero-post-slide">
+                            <!-- Single Slide -->
+                            <% Question.all.each_with_index do |question, index| %>
+                            <div class="single-slide d-flex align-items-center">
+                                <div class="post-number">
+                                    <p><%= index + 1 %></p>
+                                </div>
+                                <div class="post-title">
+                                    <a href=<%= question_path(:id => question.id)%>><%= question.title %></a>
+                                </div>
+                            </div>
+                            <%end%>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ********** Hero Area End ********** -->
+
+    <div class="main-content-wrapper section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area Start ============= -->
+                <div class="col-12 col-lg-8">
+                    <div class="post-content-area mb-50">
+                        <!-- Catagory Area -->
+                        <div class="world-catagory-area">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="title">All Questions</li>
+                                 <% Category.all.each do |category| %>
+                                <li class="nav-item">
+                                <a class="nav-link" href=<%= category_path(:category => category.id) %>><%= category.name %></a>
+                                </li>
+                                <%end%>
+                            </ul>
+
+                            <div class="tab-content" id="myTabContent">
+
+                                <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="row">
+                                     
+
+                                        <%
+=begin%>
+ <div class="col-12 col-md-12">
+                                            <!-- Single Blog Post -->
+                                                  <% Question.all.each do |question| %>
+                                            <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                                         
+                                                <div class="post-content">
+                                                    <a href="<%= question_path(:id => question.id)%>" class="headline">
+                                                        <h5><%=question.title%></h5>
+                                                    </a>
+                                                    <!-- Post Meta -->
+                                                    <div class="post-meta">
+                                                    
+                                                        <p><a href="#"><%= User.sti_name%></a> on <a href="#" class="post-date"><%= question.updated_at%></a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%end%>
+                                         
+                                            </div> 
+<%
+=end%>
+                                               <% @questions.each do |question| %>
+                                            <div class="col-12 col-md-6">
+                                            <!-- Single Blog Post -->
+                                            
+                                            <div class="single-blog-post blog-height wow fadeInUpBig" data-wow-delay="0.2s" style=" height: 190px;overflow: hidden;">
+                                               
+                                                <!-- Post Content -->
+                                                <div class="post-content">
+                                                    <a href="<%= question_path(:id => question.id)%>" class="headline">
+                                                        <h5> <%= question.title %> </h5>
+                                                    </a>
+                                                <p></p> 
+
+                                                    <!-- Post Meta -->
+                                                    <div class="post-meta">
+                                                        <p><a href="#" class="post-author"> <%=  User.find(question.user_id).first_name %></a> on <a href="#" class="post-date"><%= question.updated_at.strftime("%d %B, %Y")%></a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <%end%>
+                                         <%= will_paginate @questions %>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Catagory Area -->
+                       
+
+                    </div>
+                </div>
+
+                <!-- ========== Sidebar Area ========== -->
+                <div class="col-12 col-md-8 col-lg-4">
+                    <div class="post-sidebar-area wow fadeInUpBig" data-wow-delay="0.2s">
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">About QARail</h5>
+                            <div class="widget-content">
+                                <p>QARail's mission is to share and grow the world’s knowledge. A vast amount of the knowledge that would be valuable to many people is currently only available to a few — either locked in people’s heads, or only accessible to select groups. We want to connect the people who have knowledge to the people who need it, to bring together people with different perspectives so they can understand each other better, and to empower everyone to share their knowledge for the benefit of the rest of the world.</p>  </div>
+                        </div>
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Top Questions</h5>
+                            <div class="widget-content">
+                                <!-- Single Blog Post -->
+                                <% question = Question.order(question_count: :desc) %>
+                                <% question.take(4).each do |question| %>
+                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                                    <!-- Post Thumbnail -->
+                                    <!--<div class="post-thumbnail">
+                                        <img src="" alt="">
+                                    </div>-->
+                                    <!-- Post Content -->
+                                    <div class="post-content">
+                                        <a href=<%= question_path(:id => question.id)%> class="headline">
+                                            <h5 class="mb-0"> <%= question.title%> </h5>
+                                        </a>
+                                    </div>
+                                </div>
+                                <%end%>
+                              
+                            </div>
+                        </div>
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Stay Connected</h5>
+                            <div class="widget-content">
+                                <div class="social-area d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-vimeo"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-google"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Today’s Pick</h5>
+                            <div class="widget-content">
+                                <!-- Single Blog Post -->
+                                <% TodayQuestion.all.each do |question| %>
+                                <% question = Question.where(:id => question.question_id) %>
+                                <div class="single-blog-post todays-pick">
+                                    <!-- Post Thumbnail -->
+                                    <div class="post-thumbnail">
+                                        <img src="" alt="">
+                                    </div>
+                                    <!-- Post Content -->
+                                    <div class="post-content px-0 pb-0">
+                                        <a href="<%= question_path(:id =>question.ids) %>" class="headline">
+                                            <h5><%= question.first.title%></h5>
+                                        </a>
+                                    </div>
+                                </div>
+                                <%end%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+
+          
+
+            <!-- Load More btn -->
+          
+        </div>
+    </div>
+
+    <!-- ***** Footer Area Start ***** -->
+    <%= render "footer" %>
+    <!-- ***** Footer Area End ***** -->
+    
+
+
+

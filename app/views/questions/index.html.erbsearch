@@ -1,0 +1,325 @@
+<%
+=begin%>
+ <%= render "webpages/header" %> 
+<%
+=end%>
+
+<!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="header-top">
+                    <div class="container">
+                        <div class="row">
+                                <div class="col-1 header-top-left no-padding">
+                                       
+                                                        
+                                  </div>
+                            <div class="col-11 header-top-right no-padding">
+                                    <% unless signed_in?%>
+                                    <a class="top-contact" href=<%= new_user_session_path%>> <i class="fa fa-user"></i>&nbsp;&nbsp;Login&nbsp;&nbsp;</a>
+                                    <a class="top-contact" href="/"><i class="fa fa-user"></i>&nbsp;&nbsp;Signin&nbsp;&nbsp;</a>
+                                    <%else%>
+                                    <a class="top-contact" href=<%= destroy_user_session_path %>><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+                                    <%end%>
+                                 
+                            </div>
+                           
+                        </div>			  					
+                    </div>
+              </div>
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <!-- Logo -->
+                        <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                        <!-- Navbar Toggler -->
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#worldNav" aria-controls="worldNav" aria-expanded="false" aria-label="Toggle navigation" style="outline: none"><span class="navbar-toggler-icon"></span></button>
+                        <!-- Navbar -->
+                        <div class="collapse navbar-collapse" id="worldNav">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <%
+=begin%>
+ <% unless signed_in?%>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="/signin/">Signin</a>      
+                                </li>
+                              
+                                <li class="nav-item">
+                                    <a class="nav-link " href=<%= new_user_session_path%>>Login</a>      
+                                </li>
+                                 <%else%>
+                                <li class="nav-item">
+                                    <a class="nav-link " href=<%= destroy_user_session_path%>>Logout</a>      
+                                </li>
+                                <%end%> 
+<%
+=end%>
+                                    
+                                     
+                                    <li class="nav-item">
+                                    <% unless signed_in?%>
+                                        <a class="nav-link " href=<%=new_question_path%>>Ask A Question ?</a> 
+                                        <%else%>     
+                                         <a class="nav-link " href=<%=new_question_path%>>Ask A Question ?</a> 
+                                        
+                                    </li>
+                                   
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ankita.sharma</a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="catagory.html">Profile</a>
+                                            <a class="dropdown-item" href="single-blog.html"> Account Setting</a>
+                                            <a class="dropdown-item" href="contact.html">Logout</a>
+                                        </div>
+                                    </li><%end%>
+                            </ul>
+                            <!-- Search Form  -->
+                            <div id="search-wrapper">
+                                <!--<form action="#">-->
+                                <%= form_tag questions_path, :method => 'get' do %>                               
+                                    <!--<input type="text" id="search" placeholder="Search something...">-->
+                                    <%= text_field_tag :search, params[:search] %>
+                                    <div id="close-icon"></div>
+                                    
+                                    <!--<input class="d-none" type="submit" value="">-->
+                                <!--</form>-->
+                                <%end%>
+                            </div>
+                        </div>
+                        <!-- navbar close -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ********** Hero Area Start ********** -->
+    <div class="hero-area height-600 bg-img background-overlay" style="background-image: url(../img/blog-img/bg2.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="single-blog-title text-center">
+                        <!-- Catagory -->
+                        <div class="post-cta"><a href="#">travel</a></div>
+                        <h3>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ********** Hero Area End ********** -->
+
+    <div class="main-content-wrapper section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area ============= -->
+                <div class="col-12 col-lg-8">
+                    <div class="single-blog-content ">
+                            <div class="world-latest-articles">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12">
+                                            <div style="margin-bottom: 30px">
+                                                <h5>Search Results</h5>
+                                            </div>
+                    
+                                            <!-- Single Blog Post -->
+                                            <% @questions.each do |question| %>
+                                            <div class="single-blog-post post-style-4 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                                                
+                                                <!-- Post Content -->
+                                                <div class="post-content" style="box-shadow:none">
+                                                    <a href="#" class="headline">
+                                                        <h5><%= question.title%></h5>
+                                                    </a>
+                                                    <p><%= sanitize question.body%></p>
+                                                    <!-- Post Meta -->
+                                                    <div class="post-meta">
+                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%end%>
+
+                                            <!-- Single Blog Post -->
+                                        </div>
+                    
+                               
+                                    </div>
+                                </div>
+                    
+                                <!-- Load More btn -->
+                                <!--<div class="row">
+                                    <div class="col-12">
+                                        <div class="load-more-btn mt-50 text-center" >
+                                            <a href="#" class="btn world-btn" style="padding:0px;font-size: 14px">Load More</a>
+                                        </div>
+                                    </div>
+                                </div>-->
+                    </div>
+                   
+                </div>
+                
+
+                <!-- ========== Sidebar Area ========== -->
+                <div class="col-12 col-md-8 col-lg-4">
+                    <div class="post-sidebar-area mb-100">
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">About QARail</h5>
+                            <div class="widget-content">
+                                <p>The mango is perfect in that it is always yellow and if it’s not, I don’t want to hear about it. The mango’s only flaw, and it’s a minor one, is the effort it sometimes takes to undress the mango, carve it up in a way that makes sense, and find its way to the mouth.</p>
+                            </div>
+                        </div>
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Top Questions</h5>
+                            <div class="widget-content">
+                                <!-- Single Blog Post -->
+                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                                    <!-- Post Thumbnail -->
+                                    <div class="post-thumbnail">
+                                        <img src="../img/blog-img/b11.jpg" alt="">
+                                    </div>
+                                    <!-- Post Content -->
+                                    <div class="post-content">
+                                        <a href="#" class="headline">
+                                            <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Single Blog Post -->
+                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                                    <!-- Post Thumbnail -->
+                                    <div class="post-thumbnail">
+                                        <img src="../img/blog-img/b13.jpg" alt="">
+                                    </div>
+                                    <!-- Post Content -->
+                                    <div class="post-content">
+                                        <a href="#" class="headline">
+                                            <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Single Blog Post -->
+                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                                    <!-- Post Thumbnail -->
+                                    <div class="post-thumbnail">
+                                        <img src="../img/blog-img/b14.jpg" alt="">
+                                    </div>
+                                    <!-- Post Content -->
+                                    <div class="post-content">
+                                        <a href="#" class="headline">
+                                            <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                               
+                               
+                            </div>
+                        </div>
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Stay Connected</h5>
+                            <div class="widget-content">
+                                <div class="social-area d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-vimeo"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-google"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                      
+                     
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============== Related Post ============== -->
+     
+
+        </div>
+    </div>
+
+    <!-- ***** Footer Area Start ***** -->
+    <%= render "webpages/footer" %>
+
+    <!-- ***** Footer Area End ***** -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<h1>All Questions</h1>
+<table>
+<tr>
+<th>Title</th>
+<th>Body</th>
+<th>Edit</th>
+<tr>
+<tbody>
+<% @questions.each do |question| %>
+<tr>
+<td><%=question.title%></td>
+<td><%= sanitize question.body%></td>
+<td><%= link_to "Edit", edit_question_path(question)%></td>
+<td><%= link_to "Delete", question_path(question), method: :delete, data: { Confirm: 'Are YOu Sure?' } %><td>
+<td><%= link_to "Show", question_path(question)%></td>
+
+</tr>
+<%end%>
+</tbody>
+</table>
+<br>
+<br>
+<%= link_to "Ask Question", new_question_path %>
+<%= link_to "Facebook Login", user_facebook_omniauth_authorize_path %>
+<%= link_to "Google Login", user_google_oauth2_omniauth_authorize_path %>
+<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+-->

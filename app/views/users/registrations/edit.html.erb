@@ -1,0 +1,194 @@
+<% if current_user.admin? %>
+
+<!--<h2>Edit <%= resource_name.to_s.humanize %></h2>-->
+<div class="row vertical-left-row" style="font-size:90%; color: #3b0054; margin: 0px;">
+<div class="text-left col-md-12">
+<div class="panel panel-default" style="padding: 10px; background-color: white; margin: 10px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);">
+<div class="panel-body" style="width: 100%; padding-left: 10px; padding-right: 10px;"> 
+
+<h2 style="padding: 10px; font-size: 200%; color: #3b0054;">Edit Profile</h2>
+
+
+          <div class="inputForm" style="padding: 10px; padding-top: 0px;  max-width: 500px; ">
+
+
+<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.text_field :first_name, label: "First Name" , autofocus: true, class: 'edit-text-field' %>
+  </div>
+ 
+  <div class="field">
+    <%= f.text_field :last_name, label: "Last Name" , autofocus: true, class: 'edit-text-field' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, hide_label: true, autocomplete: "email" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, hide_label: true, autocomplete: "off", class: "edit-text-field" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, hide_label: true, autocomplete: "off", class: "edit-text-field" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password %> <br/>
+    <%= f.password_field :current_password, hide_label: true, autocomplete: "off", class: "edit-text-field" %>
+  </div>
+
+  <div class="actions">
+    <%= f.button  :Submit, :class=>"btn btn-outline-secondary" %>
+  </div>
+<% end %>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!--<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to "Back", :back %>-->
+
+<style type="text/css">
+
+.btn{
+  border: 1px solid black; 
+  color: black;
+}
+
+.btn:hover{
+  background-color: #ddd;
+  color: black;
+}
+
+.has-error{
+  color: red;
+}
+
+.control-label{
+  color: #3b0054;
+}
+
+
+@media (max-width: 767px) 
+{
+
+.inputForm{
+  width: 100%;
+
+}
+
+
+}
+</style>
+
+
+<%else%>
+
+<%= render "webpages/header"%>
+
+<!-- ********** Hero Area Start ********** -->
+    <div class="hero-area height-400 bg-img background-overlay" style="background-image: url(../img/blog-img/bg4.jpg);"></div>
+    <!-- ********** Hero Area End ********** -->
+
+    <div class="regular-page-wrap section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-12 col-lg-12">
+                    <div class="page-content">
+                            <div class="container">
+                                    <h5>Edit Profile</h5>
+                                      <hr>
+                                     <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                                      <!-- left column -->
+                                      <div class="row">
+                                      <div class="col-md-3">
+                                        <div class="text-center">
+                                          <%= image_tag user_avatar(resource, 100), class: "rounded-circle" %>
+                                          <%= f.file_field :avatar %>
+                                        </div>
+                                      </div>
+                                      
+                                      <!-- edit form column -->
+                                      <div class="col-md-9 personal-info">
+                                        <h3>Personal info</h3>
+                                        
+                                          <div class="form-group">
+                                            <label class="col-lg-3 control-label">First name:</label>
+                                            <div class="col-lg-12">
+                                              <%= f.text_field :last_name, hide_label: "Last Name" , autofocus: true %>
+                                            </div>
+                                          </div>
+                                          <div class="form-group">
+                                            <label class="col-lg-3 control-label">Last name:</label>
+                                            <div class="col-lg-12">
+                                              <%= f.text_field :last_name, hide_label: "Last Name" , autofocus: true %>
+                                            </div>
+                                          </div>
+                                         
+                                          <div class="form-group">
+                                            <label class="col-lg-3 control-label">Email:</label>
+                                            <div class="col-lg-12">
+                                              <%= f.email_field :email, autofocus: true, hide_label: true, autocomplete: "email" %>
+                                            </div>
+                                          </div>
+                                          <div class="form-group">
+                                            <label class="col-md-3 control-label">Password:</label>
+                                            <div class="col-md-12">
+                                              <%= f.password_field :password, hide_label: true, autocomplete: "off" %>
+                                            </div>
+                                          </div>
+                                          <div class="form-group">
+                                            <label class="col-md-3 control-label">Confirm password:</label>
+                                            <div class="col-md-12">
+                                              <%= f.password_field :password_confirmation, hide_label: true, autocomplete: "off"%>
+                                            </div>
+                                          </div>
+                                          <div class="form-group">
+                                                <label class="col-md-3 control-label"> Current Password</label>
+                                                <div class="col-md-12">
+                                                 <%= f.password_field :current_password, hide_label: true, autocomplete: "off"%>
+                                                </div>
+                                              </div> 
+                                          <div class="form-group">
+                                            <label class="col-md-3 control-label"></label>
+                                            <div class="col-md-12" style="text-align: right">
+                                              <%= f.button  :Submit, :class=>"btn btn-outline-secondary" %>
+                                              
+                                              <span></span>
+                  
+                                            </div>
+                                          </div>
+                                        <% end %>
+                                      </div>
+                                  </div>
+                                </div>
+                                <hr>        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<%= render  "webpages/footer" %>
+
+<%end%>

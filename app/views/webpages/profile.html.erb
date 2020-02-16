@@ -1,0 +1,107 @@
+<%= render  "webpages/header" %>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ********** Hero Area Start ********** -->
+    <div class="hero-area height-600 bg-img background-overlay" style="background-image: url(../img/blog-img/bg2.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="single-blog-title text-center">
+                        <!-- Catagory -->
+                        <h3></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ********** Hero Area End ********** -->
+
+    <div class="main-content-wrapper section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area ============= -->
+                <div class="col-12 col-lg-8">
+                    <div class="single-blog-content ">
+                            <div class="world-latest-articles">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12">
+                                            <div style="margin-bottom: 30px">
+                                                <h5>Posted Questions</h5>
+                                            </div>
+                    
+                                            <!-- Single Blog Post -->
+                                            <% @user.questions.all.each do |question| %>
+                                            <div class="single-blog-post post-style-4 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                                                
+                                                <!-- Post Content -->
+                                                <div class="post-content">
+                                                    <a href=<%= question_path(:id => question.id)%> class="headline">
+                                                        <h5><%=question.title%> </h5>
+                                                    </a>
+                                                    <h6 style= "font-size:14px; color:#8d8d8d; font-family: Work Sans"><%= sanitize question.body %></h6>
+                                                    <!-- Post Meta -->
+                                                    <div class="post-meta">
+                                                        <p><a href="#" class="post-author"><%=  User.find(question.user_id).first_name %></a> on <a href="#" class="post-date"><%= question.updated_at.strftime("%d %B, %Y") %></a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%end%>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                   
+                </div>
+                
+
+                <!-- ========== Sidebar Area ========== -->
+                <div class="col-12 col-md-8 col-lg-4">
+                    <div class="post-sidebar-area mb-100">
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title"> User Profile</h5>
+                            <!-- <h1 class="title-pen"> <span>UI</span></h1> -->
+<div class="col-12 col-md-12 col-lg-12 user-profile" style="text-align: center; margin:auto"><br>
+	<!--<img class="avatar" src=<%= current_user.image %> alt="Ash" />-->
+    <%= image_tag user_avatar(current_user, 100), class: "rounded-circle" %>
+</div>    
+  <div class="col-12 col-md-12 col-lg-12 bio" style="text-align: center; margin:auto;text-transform:uppercase;font-weight:600">
+  <div class="username">&nbsp;&nbsp;&nbsp;<%= current_user.first_name %></div>
+  
+  </div>
+    <div class="description">
+      
+  </div>
+
+
+  
+                        </div>
+                   
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Stay Connected</h5>
+                            <div class="widget-content">
+                                <div class="social-area d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-vimeo"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-google"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                      
+                     
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============== Related Post ============== -->
+     
+
+        </div>
+    </div>
+
+    <!-- ***** Footer Area Start ***** -->
+    <%= render "webpages/footer" %>

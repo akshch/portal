@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Portal</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Favicon  -->
+    <link rel="icon" href="/img/core-img/favicon.ico">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <% if signed_in? %>
+    <% if current_user.admin? %>
+      <body>
+      <% else %>
+      <% end %><%end%>
+    <% if controller_name != "webpages"  && (action_name != "new") && (controller_name != "questions" || action_name != "show") && (action_name != "search") %>
+      <% if signed_in? &&  current_user.admin?%>
+        <%= render 'layouts/leftnav' %>
+      <% else %>
+        <%= render 'layouts/header' %>
+        <%= yield %>
+      <% end %>
+    <% else %>
+      <%= yield %>
+    <% end %>
+    <% if notice %>
+      <% if notice.length > 0 %>
+        <div style="text-align: center; width: 100%; display: table;">
+          <p id="notice" class="alert alert-success text-center" style="position: absolute; 
+              z-index: 5000; top:105px; left: 50%; transform: translateX(-50%);">
+            <%= notice %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+    <% if alert %>
+      <% if alert.length > 0 %>
+        <div style="text-align: center; width: 100%; display: table;">
+          <p id="alert" class="alert alert-danger text-center" style="position: absolute; 
+              z-index: 5000; top:105px; left: 50%; transform: translateX(-50%);">
+            <%= alert %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <!-- Popper js -->
+    <script src="/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="/js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="/js/active.js"></script>
+  </body>
+  <style type="text/css">
+    .has-error{
+      color: red;
+      font-size: 12px;
+    }
+    
+    .has-error > input {
+      border: 1px solid red;
+    }
+    
+    #alert{
+      z-index: 5000;
+    }
+  </style>
+  <script>
+    setTimeout(function() {
+    $('#notice').fadeOut('slow');
+    }, 1000); // <-- time in milliseconds
+    
+    
+    setTimeout(function() {
+    $('#alert').fadeOut('slow');
+    }, 1000); // <-- time in milliseconds
+  </script>
+</html>

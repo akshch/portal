@@ -1,0 +1,238 @@
+<%= render "webpages/header" %>
+
+
+    <!-- ********** Hero Area Start ********** -->
+    <div class="hero-area height-600 bg-img background-overlay" style="background-image: url(../img/blog-img/bg2.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="single-blog-title text-center">
+                        <h3></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ********** Hero Area End ********** -->
+
+    <div class="main-content-wrapper section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area ============= -->
+                <div class="col-12 col-lg-8">
+             
+                    <div class="single-blog-content ">
+                        <!-- Post Meta 
+                        <div class="post-meta">
+                            <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                        </div>-->
+                        <!-- Post Content -->
+                        
+                        <div class="post-content">
+                           <div class="mb-30" >
+                                <h5>Question:</h5>
+                                      <div class="post-author">
+                                          <h6 style="color: #333"><%= @question.title %></h6>
+                                    
+                                </div>
+                            </div>
+                            <h5>Body:</h5>
+                            <h6 style= "font-size:14px; color:#8d8d8d; font-family: Work Sans"><%= sanitize @question.body%></h6>
+                                <!-- Post Tags -->
+                            <ul class="post-tags">
+                                <li><a href="#"><%= @question.tags.name %></a></li>
+                                <li><a href="#">Html</a></li>
+                                <li><a href="#">Sql</a></li>
+                                <li><a href="#">Css</a></li>
+                            </ul>
+                            <!-- Post Meta -->
+                            <div class="post-meta second-part">
+                                <p><a href="#" class="post-author"><%=  User.find(@question.user_id).first_name %></a> on <a href="#" class="post-date"><%= @question.updated_at.strftime("%d %B, %Y") %></a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    
+                    <!-- <div class="col-12 col-lg-8"> -->
+                            <!-- Comment Area Start -->
+                            <div class="comment_area clearfix mt-30">
+                                <ol>
+                                    <!-- Single Comment Area -->
+                                    <% y = @question.answers.where(status: "1") %>
+                                    <% y.all.each do |answer| %>
+
+                                    <li class="single_comment_area">
+                                        <!-- Comment Content -->
+                                        <div class="comment-content">
+                                            <!-- Comment Meta -->
+                                            <div class="comment-meta d-flex align-items-center justify-content-between">
+                                                <p><a href="#" class="post-author"> <%=  User.find(@question.user_id).first_name %></a> on <a href="#" class="post-date"><%= @question.updated_at.strftime("%d %B, %Y")%></a></p>
+                                                <a href="#" class="comment-reply  world-btn">Reply</a>
+                                            </div>
+                                            <p><%= answer.description%></p>
+                                        </div>
+                                        <%end%>
+                                     
+                                    </li>
+                                    
+                                  
+                                    
+                                </ol>
+                                <br><br>
+                            </div>
+                        <!-- </div> -->
+
+                        <!--Answer area started-->
+
+                    <div class="single-blog-content ">
+                        
+                        <!-- Post Content -->
+                        <div class="post-content">
+                           <!-- form open -->
+                       <div id="login-form">
+                            <!-- <h1 class="login-tag">Ask A Question</h1> -->
+                           <%= bootstrap_form_for @answer do |f| %>
+                            <p class="blabla">Post Your Answer Here</p><br>
+                          
+                              <h5 style="padding: 5px">Answer</h5>
+                              <%= f.text_area :description %>
+                              <!--<textarea class="inputs" name="message" placeholder="Enter your Answer" style="width:100%; height:150px; outline:none"></textarea>-->
+                               <%= f.hidden_field :question_id, value: @question.id %>
+                             <br><br>
+                             <div style="text-align: left;margin: auto">
+                             <button class="btn ">Submit</button><br><br>
+                            
+                             </div>
+                            <%end%>
+                        </div>
+                          <!-- form Close -->
+                          </div>
+                          </div>
+                </div>
+                
+
+                <!-- ========== Sidebar Area ========== -->
+                <div class="col-12 col-md-8 col-lg-4">
+                    <div class="post-sidebar-area mb-100">
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">About QARail</h5>
+                            <div class="widget-content">
+                                <p>QARail's mission is to share and grow the world’s knowledge. A vast amount of the knowledge that would be valuable to many people is currently only available to a few — either locked in people’s heads, or only accessible to select groups. We want to connect the people who have knowledge to the people who need it, to bring together people with different perspectives so they can understand each other better, and to empower everyone to share their knowledge for the benefit of the rest of the world.</p>
+                            </div>
+                        </div>
+
+                         <!-- category Area -->
+                           <div class="sidebar-widget-area">
+                                <h5 class="title">Categories</h5>
+                                <div class="widget-content">
+                                    <!-- Single Blog Post -->
+                                    <% Category.all.each do |category| %>
+                                    <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                                      
+                                        <!-- Post Content -->
+                                        <div class="post-content" >
+                                            <a href="<%= category_path(:category => category.id) %>" class="headline" >
+                                                <h5 class="mb-0" ><%= category.name%></h5>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <%end%>
+                                </div>
+                            </div>
+                            <!-- category Area -->
+                            
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Top Questions</h5>
+                            <div class="widget-content">
+                                <!-- Single Blog Post -->
+                                <% question = Question.order(question_count: :desc) %>
+                                <% question.take(4).each do |question| %>
+                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                                    <!-- Post Thumbnail
+                                    <div class="post-thumbnail">
+                                        <img src="../img/blog-img/b11.jpg" alt="">
+                                    </div> -->
+                                    <!-- Post Content -->
+                                    <div class="post-content">
+                                        <a href="#" class="headline">
+                                            <h5 class="mb-0"><%= question.title%></h5>
+                                        </a>
+                                    </div>
+                                </div>
+                                <%end%>
+                                
+                    
+                               
+                               
+                            </div>
+                        </div>
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Stay Connected</h5>
+                            <div class="widget-content">
+                                <div class="social-area d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-vimeo"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-google"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                      
+                     
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============== Related Post ============== -->
+     
+
+        </div>
+    </div>
+
+    <!-- ***** Footer Area Start ***** -->
+   <%= render "webpages/footer" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

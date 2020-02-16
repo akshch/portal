@@ -1,0 +1,18 @@
+<div class = 'col-md-8 offset-2'>
+<h1 class = "test-center">Add Question</h1>
+<%= form_for @question do |f| %>
+ <p>
+<%= f.label :question %> <br>
+<%= f.text_field :title %> 
+</p>
+
+<p>
+<%= f.label :body %><br>
+<%= f.hidden_field :body, id: :question_body %>
+<trix-editor input="question_body"></trix-editor>
+</p>
+<p>
+<%= f.submit %>
+</p>
+<%end%>
+</div>
