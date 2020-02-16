@@ -23,7 +23,7 @@ gem "select2-rails", "4.0.3"
 gem "jquery-rails", "4.3.3"
 gem "will_paginate", "3.1.6"
 gem "gravatar_image_tag", "1.2.0"
-gem "mini_magick", "4.9.2"
+gem "mini_magick", "4.9.4"
 gem "bootsnap", "1.3.2", require: false
 gem "mina"
 
