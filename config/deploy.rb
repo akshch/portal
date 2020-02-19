@@ -1,5 +1,6 @@
 require "mina/rails"
 require "mina/git"
+require "mina/bundler"
 # require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 require "mina/rbenv"
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
@@ -10,11 +11,13 @@ require "mina/rbenv"
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :application_name, "foobar"
-set :domain, "foobar.com"
+#set :application_name, "foobar"
+set :domain, "159.65.151.175"
 set :deploy_to, "/home/deployer/apps/portal"
-set :repository, "git://..."
+set :repository, "git@github.com:akshch/portal.git"
 set :branch, "master"
+set :user, "deployer"
+set :forward_agent, true
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
