@@ -1,22 +1,14 @@
-# set path to application
-app_dir = File.expand_path("home/deployer/apps/portal/current", __FILE__)
-shared_dir = "#{app_dir}/shared"
-working_directory app_dir
+root = "/home/deployer/apps/portal/current"
+working_directory root
+pid "#{root}/tmp/pids/unicorn.pid"
+stderr_path "#{root}/log/unicorn.log"
+stdout_path "#{root}/log/unicorn.log"
 
-# Set unicorn options
+listen "/tmp/unicorn.portal.sock"
 worker_processes 2
+timeout 60
+
 preload_app true
-timeout 30
-
-# Set up socket location
-listen "#{shared_dir}/tmp/unicorn.portal.sock" #, :backlog => 64
-
-# Logging
-stderr_path "#{shared_dir}/log/unicorn.stderr.log"
-stdout_path "#{shared_dir}/log/unicorn.stdout.log"
-
-# Set master PID location
-pid "#{shared_dir}/tmp/pids/unicorn.pid"
 
 if GC.respond_to?(:copy_on_write_friendly=)
   GC.copy_on_write_friendly = true
